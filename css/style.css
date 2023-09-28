@@ -2,7 +2,7 @@
     0% { width: 0%; filter: blur(1px); }
     100% { width: 100%; filter: blur(0px); }
 }
-@keyframes moveLogo {
+@keyframes moveUp {
     0%,50% { 
         margin: 25vh 0 0 0;
         width: 210px;
@@ -46,8 +46,7 @@ body {
     --yellow: #FFEB0B;
     --black: #000;
     --white: #fff;
-    --padding: calc(8px + 1.5625vw);
-    
+    --distance: calc(8px + 1.5625vw);
     font-size: calc(15px + 0.390625vw);
     background: var(--black);
     color: var(--white);
@@ -55,7 +54,6 @@ body {
 canvas {
     width: 100%;
     height: 100%;
-    
     position: fixed;
     top: 0;
     bottom: 0;
@@ -64,38 +62,36 @@ canvas {
     display: grid;
     grid-template-columns: 100vw;
     grid-template-rows: 100vh 100vh 25vh;
-
     grid-gap: 25vh 0;
-
     width: 100vw;
     height: 100vh;
 }
-.container>:nth-child(1) {
+.title {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
     z-index: 1;
     background: var(--black);
 }
-.container>:nth-child(1)>:nth-child(1) {
+.title>:nth-child(1) {
     justify-self: center;
     align-self: flex-end;
     margin: 10vw 0;
     width: 100px;
     height: 100px;
     font-size: 2.9rem;
-    animation: moveLogo 2s cubic-bezier(0.7, 0.01, 0.26, 1) 1;
+    animation: moveUp 2s cubic-bezier(0.7, 0.01, 0.26, 1) 1;
 }
-.container>:nth-child(1)>:nth-child(1) img {
+.title>:nth-child(1) img {
     width: 100%;
     height: 100%;
 }
-.container>:nth-child(1)>:nth-child(1) p {
+.title>:nth-child(1) p {
     white-space:nowrap;
     overflow:hidden;
     animation: revealLogoText 1s cubic-bezier(0.7, 0.01, 0.26, 1) 1;
 }
-.container>:nth-child(1)>:nth-child(2) {
+.title>:nth-child(2) {
     justify-self: center;
     align-self: flex-start;
     width: 45vw;
@@ -104,51 +100,78 @@ canvas {
     font-size: 5vw;
     animation: revealMainText 5s cubic-bezier(0.7, 0.01, 0.4, 1) 1;
 }
-.container>:nth-child(1)>:nth-child(2) span {
+.title>:nth-child(2) span {
     width:100%;
     display:inline-block;
 }
 
-.container>:nth-child(2) {
+.content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows:  1fr 1fr 1fr;
     z-index: 1;
     background: var(--black);
 }
-
-.container>:nth-child(2) h1 {
+.content h1 {
     grid-row: 1;
     grid-column: 1;
     font-size: 3em;
-    padding: var(--padding) 0 0 0;
+    padding: var(--distance) 0 0 0;
     justify-self: center;
     align-self: flex-end;
 }
-.container>:nth-child(2) img {
+.content img {
     width: 100%;
     grid-row: 2;
     grid-column: 2;
-    padding: var(--padding);
+    padding: var(--distance);
     justify-self: center;
     align-self: center;
 }
-.container>:nth-child(2) p {
+
+.content p {
     grid-row: 2;
     grid-column: 1;
     text-indent: 1em;
     font-size: 1.1em;
-    padding: var(--padding);
+    padding: var(--distance);
     justify-self: center;
     align-self: center;
 }
-.container>:nth-child(2) a {
+.content button {
     grid-row: 3;
     grid-column: 1;
     justify-self: center;
     align-self: flex-start;
 }
+
+.footer {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: 1fr 1fr;
+    z-index: 1;
+    background: var(--black);
+}
+.footer >:nth-child(1) {
+    grid-row: end; 
+    grid-column: 2;
+    text-indent: 0.8em;
+    padding: var(--distance);
+    font-size: 0.8em;
+    justify-self: center;
+    align-self: flex-end;
+}
+.footer a {
+    font-size: 1em;
+}
 a {
+    font-weight: bold;
+    color: var(--red);
+    margin: calc(var(--distance)/4);
+    font-size: 1em;
+    text-decoration: none;
+}
+button {
     font-weight: bold;
     width: fit-content;
     height: fit-content;
@@ -160,42 +183,9 @@ a {
     text-transform: uppercase;
     border: 0;
     padding: 10px 25px;
-    margin: var(--padding);    
+    margin: var(--distance);    
     clip-path: polygon(92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%, 0 0);
 }
-a:hover {
+button:hover {
     box-shadow: inset 0em 0em 0em 10em rgba(0, 0, 0, 0.3);
-}
-.container>:nth-child(3) {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    grid-template-rows: 1fr 1fr;
-    z-index: 1;
-    background: var(--black);
-}
-.container>:nth-child(3)>:nth-child(1) {
-    grid-row: end; 
-    grid-column: 2;
-    text-indent: 0.8em;
-    padding: var(--padding);
-    font-size: 0.8em;
-    justify-self: center;
-    align-self: flex-end;
-}
-.container>:nth-child(3) a {
-    background: var(--red);
-    font-size: 1.5em;
-    grid-row: 1;
-}
-.container>:nth-child(3)>:nth-child(2) {
-    justify-self: flex-end;
-    align-self: flex-end;
-}
-.container>:nth-child(3)>:nth-child(3) {
-    justify-self: center;
-    align-self: flex-end;
-}
-.container>:nth-child(3)>:nth-child(4) {
-    justify-self: flex-start;
-    align-self: flex-end;
 }
